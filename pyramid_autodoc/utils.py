@@ -194,7 +194,10 @@ def get_route_data(route, registry):
             ]
 
         route_request_methods = route_intr['request_methods']
-        view_intr = registry.introspector.related(route_intr)
+        view_intr = [
+            intr for intr in registry.introspector.related(route_intr)
+            if intr.category_name == 'views'
+        ]
 
         if view_intr:
             for view in view_intr:
